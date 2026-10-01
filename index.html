@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WITPax ETNA - Interactive Assessment Portal</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Custom Application CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside id="appSidebar" class="app-sidebar">
+            <div class="sidebar-header d-flex align-items-center gap-3 px-3 py-3 border-bottom border-secondary border-opacity-25">
+                <div class="brand-logo bg-primary text-white rounded-3 d-flex align-items-center justify-content-center shadow-sm">
+                    <i class="bi bi-gear-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0 fw-bold text-white">WITPax ETNA</h6>
+                    <small class="text-secondary fs-7">Assessment Portal</small>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav p-3 flex-grow-1">
+                <ul class="nav nav-pills flex-column gap-1">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" data-target="view-welcome">
+                            <i class="bi bi-house-door me-2"></i><span>Welcome & Info</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-target="view-form">
+                            <i class="bi bi-pencil-square me-2"></i><span>Assessment Form</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-target="view-forum-summary">
+                            <i class="bi bi-chat-left-text me-2"></i><span>Open Forum Summary</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-target="view-records">
+                            <i class="bi bi-table me-2"></i><span>Data Records</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-target="view-analytics">
+                            <i class="bi bi-graph-up me-2"></i><span>Analytics Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-target="view-report">
+                            <i class="bi bi-file-earmark-text me-2"></i><span>Assessment Report</span>
+                        </a>
+                    </li>
+                    <li class="nav-item border-top border-secondary border-opacity-25 pt-2 mt-2">
+                        <a href="#" class="nav-link" data-target="view-settings">
+                            <i class="bi bi-sliders me-2"></i><span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer p-3 border-top border-secondary border-opacity-25">
+                <small class="text-secondary d-block mb-1">Local Storage Usage</small>
+                <div class="progress" style="height: 6px;">
+                    <div class="progress-bar bg-success" id="storageBar" style="width: 5%"></div>
+                </div>
+                <small class="text-secondary mt-1 d-block" id="recordCountText">0 Records Stored</small>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <button class="btn btn-sm btn-outline-secondary d-md-none me-2" id="sidebarToggle">
+                    <i class="bi bi-list fs-5"></i>
+                </button>
+                <div class="header-titles me-auto">
+                    <h6 class="mb-0 fw-bold text-navy">Welding Instructors Training — SEABERY Simulator</h6>
+                    <span class="text-muted small">Participant Expectations & Pre-Training Assessment</span>
+                </div>
+                <span class="badge bg-light text-dark border"><i class="bi bi-check-circle text-success me-1"></i> System Ready</span>
+            </header>
+
+            <div class="content-body p-3 p-md-4">
+
+                <!-- 1. WELCOME VIEW -->
+                <section id="view-welcome" class="app-view active">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <span class="badge bg-warning text-dark mb-2 px-3 py-1 fw-semibold">TVET Capacity Building</span>
+                            <h2 class="fw-bold text-navy mb-2">Welding Instructors Needs Assessment</h2>
+                            <p class="text-muted lead fs-6 mb-4">Baseline competency evaluation & priority gap analytics tool for simulator-based technical instruction.</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-primary px-4 py-2" onclick="navigateTo('view-form')"><i class="bi bi-pencil-square me-2"></i>Start Assessment</button>
+                                <button class="btn btn-outline-primary px-4 py-2" onclick="navigateTo('view-analytics')"><i class="bi bi-bar-chart-line me-2"></i>View Analytics</button>
+                                <button class="btn btn-outline-secondary px-4 py-2" onclick="navigateTo('view-records')"><i class="bi bi-table me-2"></i>View Records</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <i class="bi bi-bullseye fs-3 text-primary mb-2"></i>
+                                <h6 class="fw-bold">Targeted Diagnostics</h6>
+                                <p class="text-muted small mb-0">Identifies individual pedagogical and process-specific skill gaps before hands-on simulator sessions.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <i class="bi bi-calculator fs-3 text-success mb-2"></i>
+                                <h6 class="fw-bold">Auto-Calculated Priority Gaps</h6>
+                                <p class="text-muted small mb-0">Automatically computes Priority Gap = Importance - Ability matrix values in real-time.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <i class="bi bi-shield-check fs-3 text-info mb-2"></i>
+                                <h6 class="fw-bold">Client-Side Data Privacy</h6>
+                                <p class="text-muted small mb-0">Data is maintained locally within your browser session with JSON & CSV backup capabilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. ASSESSMENT FORM VIEW -->
+                <section id="view-form" class="app-view">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold text-navy" id="stepTitle">Part I: Personal & Professional Profile</span>
+                                <span class="badge bg-primary" id="stepBadge">Step 1 of 8</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-success" id="formProgress" style="width: 12.5%"></div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1 justify-content-between">
+                                <button class="step-btn active" onclick="goToStep(1)">Part I</button>
+                                <button class="step-btn" onclick="goToStep(2)">Part II</button>
+                                <button class="step-btn" onclick="goToStep(3)">Part III</button>
+                                <button class="step-btn" onclick="goToStep(4)">Part IV</button>
+                                <button class="step-btn" onclick="goToStep(5)">Part V</button>
+                                <button class="step-btn" onclick="goToStep(6)">Part VI</button>
+                                <button class="step-btn" onclick="goToStep(7)">Part VII</button>
+                                <button class="step-btn" onclick="goToStep(8)">Part VIII</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="assessmentForm" onsubmit="handleFormSubmit(event)">
+                        
+                        <!-- Step 1: Profile -->
+                        <div class="form-step active" data-step="1">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part I: Personal & Professional Profile</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold">Participant Code</label>
+                                            <input type="text" class="form-control" id="partCode" readonly>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label class="form-label fw-semibold">Full Name *</label>
+                                            <input type="text" class="form-control" id="partName" placeholder="e.g. Alex Mercer" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Email Address</label>
+                                            <input type="email" class="form-control" id="partEmail" placeholder="alex.mercer@tvet.edu">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Institution / Vocational Center *</label>
+                                            <input type="text" class="form-control" id="partInst" placeholder="e.g. Regional TVET Center" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Years Teaching Welding</label>
+                                            <select class="form-select" id="partYears">
+                                                <option value="1-3 Years">1-3 Years</option>
+                                                <option value="4-7 Years" selected>4-7 Years</option>
+                                                <option value="8-12 Years">8-12 Years</option>
+                                                <option value="12+ Years">12+ Years</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Primary Teaching Focus</label>
+                                            <select class="form-select" id="partFocus">
+                                                <option value="SMAW">SMAW (Stick)</option>
+                                                <option value="GMAW/FCAW" selected>GMAW / FCAW (MIG/MAG)</option>
+                                                <option value="GTAW">GTAW (TIG)</option>
+                                                <option value="Multi-Process">Multi-Process Generalist</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Teaching Assignment -->
+                        <div class="form-step" data-step="2">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part II: Current Teaching Assignment</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Average Class Size (Students)</label>
+                                            <input type="number" class="form-control" id="classSize" min="1" max="100" value="20">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Weekly Practical Workshop Hours</label>
+                                            <input type="number" class="form-control" id="weeklyHours" min="1" max="40" value="15">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold">Most Common Student Learning Obstacles (Select all that apply)</label>
+                                            <div class="row g-2">
+                                                <div class="col-md-6"><div class="form-check"><input class="form-check-input student-obstacle" type="checkbox" value="Arc Length & Distance Control" id="obs1" checked><label class="form-check-label" for="obs1">Arc Length & Distance Control</label></div></div>
+                                                <div class="col-md-6"><div class="form-check"><input class="form-check-input student-obstacle" type="checkbox" value="Travel Angle & Speed" id="obs2" checked><label class="form-check-label" for="obs2">Travel Angle & Speed</label></div></div>
+                                                <div class="col-md-6"><div class="form-check"><input class="form-check-input student-obstacle" type="checkbox" value="WPS & Parameter Selection" id="obs3"><label class="form-check-label" for="obs3">WPS & Parameter Selection</label></div></div>
+                                                <div class="col-md-6"><div class="form-check"><input class="form-check-input student-obstacle" type="checkbox" value="Defect Visual Inspection" id="obs4" checked><label class="form-check-label" for="obs4">Defect Visual Inspection</label></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Equipment Confidence -->
+                        <div class="form-step" data-step="3">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part III: Technical Equipment & Process Confidence</div>
+                                <div class="card-body">
+                                    <p class="small text-muted mb-3">Self-evaluate your personal practical confidence level across processes (1 = Low, 5 = Expert).</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle text-center">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="text-start">Process / Domain</th>
+                                                    <th>Confidence Rating (1 - 5)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td class="text-start fw-semibold">SMAW (Shielded Metal Arc Welding)</td><td><input type="range" class="form-range" id="confSMAW" min="1" max="5" value="4" oninput="this.nextElementSibling.value = this.value"><output class="ms-2 fw-bold">4</output></td></tr>
+                                                <tr><td class="text-start fw-semibold">GMAW / FCAW (Gas / Flux Core Arc)</td><td><input type="range" class="form-range" id="confGMAW" min="1" max="5" value="3" oninput="this.nextElementSibling.value = this.value"><output class="ms-2 fw-bold">3</output></td></tr>
+                                                <tr><td class="text-start fw-semibold">GTAW (Gas Tungsten Arc / TIG)</td><td><input type="range" class="form-range" id="confGTAW" min="1" max="5" value="2" oninput="this.nextElementSibling.value = this.value"><output class="ms-2 fw-bold">2</output></td></tr>
+                                                <tr><td class="text-start fw-semibold">Nondestructive Testing & Inspection</td><td><input type="range" class="form-range" id="confNDT" min="1" max="5" value="3" oninput="this.nextElementSibling.value = this.value"><output class="ms-2 fw-bold">3</output></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Simulator & Digital Experience -->
+                        <div class="form-step" data-step="4">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part IV: Simulator & Digital Experience</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Prior SEABERY Soldamatic Experience</label>
+                                            <select class="form-select" id="soldamaticExp">
+                                                <option value="None">None (First Time)</option>
+                                                <option value="Novice" selected>Novice (< 10 hours)</option>
+                                                <option value="Intermediate">Intermediate (10 - 50 hours)</option>
+                                                <option value="Advanced">Advanced / Admin (> 50 hours)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Prior VR/AR Training Systems Used</label>
+                                            <input type="text" class="form-control" id="vrSystems" placeholder="e.g. Soldamatic, Lincoln VRTEX, Miller AugmentedArc">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold">Primary Challenge in Adopting Simulators</label>
+                                            <textarea class="form-control" id="simChallenge" rows="2" placeholder="e.g. Aligning virtual scoring with physical workshop grading rubrics..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Curriculum Needs -->
+                        <div class="form-step" data-step="5">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part V: Curriculum & Instructional Needs</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Preferred Rubric Alignment standard</label>
+                                            <select class="form-select" id="rubricStandard">
+                                                <option value="AWS D1.1 Structural Steel">AWS D1.1 Structural Steel</option>
+                                                <option value="ISO 9606 Qualification Standard">ISO 9606 Qualification Standard</option>
+                                                <option value="National TVET Curriculum Module">National TVET Curriculum Module</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold">Need for Custom Joint / WPS Creation</label>
+                                            <select class="form-select" id="customWPS">
+                                                <option value="High Priority">High Priority (Urgent requirement)</option>
+                                                <option value="Medium Priority" selected>Medium Priority (Useful to have)</option>
+                                                <option value="Low Priority">Low Priority (Standard joints sufficient)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Open Forum Expectations -->
+                        <div class="form-step" data-step="6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part VI: Open Forum & Qualitative Expectations</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold">1. Key objectives you want to accomplish during this workshop</label>
+                                            <textarea class="form-control" id="forumObj" rows="2" required placeholder="Describe what you want to gain from SEABERY Soldamatic training..."></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold">2. Planned implementation strategy in your institution post-training</label>
+                                            <textarea class="form-control" id="forumPlan" rows="2" placeholder="How will you integrate simulator hours into your course syllabus?"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 7: Priority Matrix Calculator -->
+                        <div class="form-step" data-step="7">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold d-flex justify-content-between align-items-center">
+                                    <span>Part VII: Priority Gap Auto-Calculator</span>
+                                    <span class="badge bg-warning text-dark">Live Calculated</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small text-muted mb-3">Rate your current <strong>Ability</strong> and required <strong>Importance</strong> (1-5 scale). The Priority Gap is automatically computed: <code>Priority Gap = Importance - Ability</code>.</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle text-center">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th class="text-start">Competency Area</th>
+                                                    <th style="width: 130px;">Ability (1-5)</th>
+                                                    <th style="width: 130px;">Importance (1-5)</th>
+                                                    <th style="width: 120px;">Priority Gap</th>
+                                                    <th style="width: 140px;">Priority Level</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="matrixTableBody">
+                                                <!-- Dynamic Rows populated by JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 8: Baseline Knowledge Check -->
+                        <div class="form-step" data-step="8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-navy text-white fw-bold">Part VIII: Baseline Knowledge Check (10 Diagnostic Questions)</div>
+                                <div class="card-body" id="quizContainer">
+                                    <!-- Diagnostic quiz rendered by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Controls -->
+                        <div class="card border-0 shadow-sm mt-3">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-outline-secondary" id="btnPrev" onclick="changeStep(-1)" disabled><i class="bi bi-arrow-left me-1"></i> Back</button>
+                                <button type="button" class="btn btn-primary" id="btnNext" onclick="changeStep(1)">Next <i class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+
+                    </form>
+                </section>
+
+                <!-- 3. OPEN FORUM SUMMARY VIEW -->
+                <section id="view-forum-summary" class="app-view">
+                    <h4 class="fw-bold text-navy mb-3">Open Forum Participant Expectations</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <h6 class="fw-bold text-primary"><i class="bi bi-lightbulb me-2"></i>Key Themes & Pedagogical Priorities</h6>
+                                <ul class="list-group list-group-flush small mt-2">
+                                    <li class="list-group-item bg-transparent">Integrating simulator telemetry reports directly into formal TVET grading rubrics.</li>
+                                    <li class="list-group-item bg-transparent">Troubleshooting real-time arc length and travel angle errors during GTAW/GMAW sessions.</li>
+                                    <li class="list-group-item bg-transparent">Optimizing consumable and raw steel cost savings using virtual pre-practice hours.</li>
+                                    <li class="list-group-item bg-transparent">Standardizing instructor calibration across regional vocational institutes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <h6 class="fw-bold text-success"><i class="bi bi-check2-circle me-2"></i>Actionable Workshop Deliverables</h6>
+                                <ul class="list-group list-group-flush small mt-2">
+                                    <li class="list-group-item bg-transparent">Hands-on hardware calibration of SEABERY Soldamatic helmets and torches.</li>
+                                    <li class="list-group-item bg-transparent">Development of custom WPS parameters for multi-pass groove joints.</li>
+                                    <li class="list-group-item bg-transparent">Establishment of instructor peer-review diagnostic protocols.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. DATA RECORDS VIEW -->
+                <section id="view-records" class="app-view">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <h5 class="fw-bold text-navy mb-0">Saved Participant Records</h5>
+                            <div class="d-flex gap-2">
+                                <input type="text" class="form-control form-control-sm" id="tableSearch" placeholder="Search records..." onkeyup="filterRecords()">
+                                <button class="btn btn-sm btn-outline-success text-nowrap" onclick="exportDataCSV()"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV</button>
+                                <button class="btn btn-sm btn-outline-primary text-nowrap" onclick="exportDataJSON()"><i class="bi bi-download me-1"></i> Export JSON</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0" id="recordsTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Institution</th>
+                                            <th>Teaching Experience</th>
+                                            <th>Mean Priority Gap</th>
+                                            <th>Baseline Score</th>
+                                            <th class="text-end">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recordsTbody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. ANALYTICS DASHBOARD VIEW -->
+                <section id="view-analytics" class="app-view">
+                    <h4 class="fw-bold text-navy mb-3">Pre-Training Assessment Analytics</h4>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm p-3 border-start border-4 border-primary">
+                                <small class="text-muted fw-bold">TOTAL RESPONDENTS</small>
+                                <h3 class="fw-bold text-navy mb-0" id="kpiTotal">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm p-3 border-start border-4 border-success">
+                                <small class="text-muted fw-bold">AVG BASELINE SCORE</small>
+                                <h3 class="fw-bold text-success mb-0" id="kpiBaseline">0%</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm p-3 border-start border-4 border-warning">
+                                <small class="text-muted fw-bold">HIGH PRIORITY GAPS</small>
+                                <h3 class="fw-bold text-warning mb-0" id="kpiCriticalGaps">0 Areas</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm p-3 border-start border-4 border-info">
+                                <small class="text-muted fw-bold">SOLDAMATIC NOVICES</small>
+                                <h3 class="fw-bold text-info mb-0" id="kpiNovice">0%</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <h6 class="fw-bold mb-3">Average Priority Gap by Topic</h6>
+                                <canvas id="chartPriorityGaps" height="220"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm p-3 h-100">
+                                <h6 class="fw-bold mb-3">Participant Teaching Experience</h6>
+                                <canvas id="chartExperience" height="220"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. REPORT VIEW -->
+                <section id="view-report" class="app-view">
+                    <div class="card border-0 shadow-sm p-4 bg-white printable-area">
+                        <div class="border-bottom pb-3 mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="fw-bold text-navy mb-0">Executive Needs Assessment Report</h4>
+                                <small class="text-muted">Generated for TVET Capacity Building Cohort</small>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm d-print-none" onclick="window.print()"><i class="bi bi-printer me-1"></i> Print / PDF</button>
+                        </div>
+                        <h5>1. Executive Summary</h5>
+                        <p class="text-secondary" id="reportSummaryText">Cohort assessment indicates high demand for specialized parameter configuration in GMAW/GTAW simulator modes. Priority training focus should be allocated towards interpretation of real-time sensory feedback telemetry.</p>
+                        
+                        <h5 class="mt-4">2. Priority Learning Gaps Identified</h5>
+                        <ul id="reportGapsList" class="text-secondary">
+                            <li><strong>SEABERY Soldamatic Telemetry Analysis:</strong> High Priority Gap</li>
+                            <li><strong>GMAW Volts/WPS Parameter Tuning:</strong> High Priority Gap</li>
+                        </ul>
+
+                        <h5 class="mt-4">3. Recommended Action Plan</h5>
+                        <p class="text-secondary">Allocate 60% of technical instruction to live simulator calibration and real-time telemetry analysis, followed by standardizing grading rubrics across participating vocational centers.</p>
+                    </div>
+                </section>
+
+                <!-- 7. SETTINGS VIEW -->
+                <section id="view-settings" class="app-view">
+                    <div class="card border-0 shadow-sm p-4">
+                        <h5 class="fw-bold text-navy mb-3">System Settings & Data Management</h5>
+                        <div class="form-check form-switch mb-4">
+                            <input class="form-check-input" type="checkbox" id="autoSaveToggle" checked>
+                            <label class="form-check-label" for="autoSaveToggle">Enable Auto-Save Drafts in Local Storage</label>
+                        </div>
+                        
+                        <h6 class="fw-bold mb-2">Import Data</h6>
+                        <input type="file" id="importFileInput" accept=".json" class="form-control form-control-sm w-50 mb-3" onchange="importDataJSON(event)">
+
+                        <h6 class="fw-bold text-danger mb-2">Reset Portal</h6>
+                        <button class="btn btn-outline-danger btn-sm" onclick="clearData()"><i class="bi bi-trash me-1"></i> Clear Local Data & Reset Defaults</button>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Record View Modal -->
+    <div class="modal fade" id="recordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-navy text-white">
+                    <h5 class="modal-title fw-bold" id="modalRecordTitle">Record Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalRecordBody">
+                    <!-- Dynamic Record Data -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Application Logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>
